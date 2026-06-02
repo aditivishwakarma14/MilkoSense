@@ -31,9 +31,8 @@ services:
     autoDeploy: true
 
   # 3. Static React Vite Frontend (Static Site)
-  - type: web
+  - type: static
     name: milkosense-frontend
-    env: static
     rootDir: frontend
     buildCommand: npm install && npm run build
     publishDir: dist
