@@ -28,3 +28,17 @@ backend/reports/history.json
 *.ntvs*
 *.njsproj
 *.sln
+
+# Python cache and environments
+**/__pycache__/
+**/*.pyc
+**/*.pyo
+**/*.pyd
+.env/
+venv/
+ENV/
+env/
+
+# ML databases and large runtime files
+**/predictions.db
+
