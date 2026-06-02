@@ -29,14 +29,15 @@ services:
         value: dev-key-milkosense
 
   # 3. Static React Vite Frontend (Static Site)
-  - type: static
+  - type: static_site
     name: milkosense-frontend
     rootDir: frontend
     buildCommand: npm install && npm run build
-    publishDir: dist
+    staticPublishPath: dist
     envVars:
       - key: VITE_API_URL
         fromService:
           name: milkosense-backend
           type: web
           property: url
+
