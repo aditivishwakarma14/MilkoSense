@@ -1,0 +1,20 @@
+{
+  "name": "milkosense-monorepo",
+  "version": "2.0.0",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "dev:frontend": "npm run dev --workspace=frontend",
+    "dev:backend": "npm run dev --workspace=milkosense-backend",
+    "dev:ml": "cd ml-service && venv\\Scripts\\uvicorn main:app --host 0.0.0.0 --port 8000 --reload",
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\" \"npm run dev:ml\"",
+    "build": "npm run build --workspace=frontend",
+    "start": "npm run start --workspace=milkosense-backend"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

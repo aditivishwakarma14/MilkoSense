@@ -1,0 +1,115 @@
+@import "tailwindcss";
+@config "../tailwind.config.js";
+
+@variant dark (&:is(.dark, .dark *));
+@custom-variant dark (&:is(.dark, .dark *));
+
+@theme {
+  --color-dark-bg: #09090B;
+  --color-dark-surface: #101513;
+  --color-dark-elevated: #141A18;
+  --color-dark-border: rgba(255, 255, 255, 0.06);
+  --color-dark-text-primary: #F8FAFC;
+  --color-dark-text-secondary: #CBD5E1;
+  --color-dark-text-muted: #94A3B8;
+
+  --color-brand-primary: #10B981;
+  --color-brand-secondary: #34D399;
+  --color-brand-mint: #6EE7B7;
+  
+  --color-gray-50: #f8fafc;
+  --color-gray-100: #f1f5f9;
+  --color-gray-200: #e2e8f0;
+  --color-gray-300: #cbd5e1;
+  --color-gray-400: #94a3b8;
+  --color-gray-500: #64748b;
+  --color-gray-600: #475569;
+  --color-gray-700: #334155;
+  --color-gray-800: #1e293b;
+  --color-gray-900: #0f172a;
+
+  /* Curated Organic Sustainable Accents */
+  --color-iot-cyan: #059669; /* Vibrant Emerald Green Primary (active tabs, buttons) */
+  --color-iot-blue: #047857; /* Deep Emerald Green Accent */
+  --color-iot-green: #065F46; /* Safe emerald green status badge */
+  --color-iot-yellow: #D97706; /* Muted amber warning */
+  --color-iot-red: #EF4444; /* Hazard crimson alert */
+  --color-iot-indigo: #0D9488; /* Compliance teal */
+  
+  --font-sans: 'Outfit', 'Inter', sans-serif;
+  --font-mono: 'Fira Code', monospace;
+  
+  --shadow-glass: 0 8px 32px 0 rgba(5, 150, 105, 0.04); /* Elegant soft emerald green glowing halos */
+  --shadow-glass-light: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
+}
+
+body {
+  @apply bg-white text-gray-900 antialiased transition-colors duration-300;
+  font-family: 'Outfit', 'Inter', sans-serif;
+}
+
+.dark body {
+  background-color: var(--color-dark-bg);
+  color: var(--color-dark-text-primary);
+}
+
+/* Premium Industrial Glassmorphism Panels */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(5, 150, 105, 0.12); /* Subtle fresh emerald borders */
+}
+
+.glass-panel-light {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+/* Dynamic Alert/Sensor Pulsing Effects */
+@keyframes status-pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.45;
+    transform: scale(1.15);
+  }
+}
+
+.pulse-alert {
+  animation: status-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Custom Scrollbar for Workstation Dashboard Grids */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(5, 150, 105, 0.01);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(5, 150, 105, 0.15);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(5, 150, 105, 0.25);
+}
+
+/* Gradient text animations */
+@keyframes animate-gradient {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+.animated-gradient-text {
+  background: linear-gradient(to right, #059669, #047857, #065F46, #059669);
+  background-size: 300% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: animate-gradient 8s ease infinite;
+}
+

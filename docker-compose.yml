@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  # 1. MongoDB Database Container
+  mongodb:
+    image: mongo:6.0
+    container_name: milkosense_mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    restart: always
+
+  # 2. Express + Socket.IO Backend API
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    image: milkosense-backend:latest
+    container_name: milkosense_backend
+    ports:
+      - "5000:5000"
+    environment:
+      - PORT=5000
+      - NODE_ENV=production
+      - MONGO_URI=mongodb+srv://aditivishwakarmacoding_db_user:i6CUSuRcDJPDJSpj@milkosense.ndllje8.mongodb.net/milkosense
+    volumes:
+      - backend_reports:/usr/src/app/reports
+    depends_on:
+      - mongodb
+    restart: always
+
+  # 3. Static Web Frontend App
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    image: milkosense-frontend:latest
+    container_name: milkosense_frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    restart: always
+
+volumes:
+  mongo_data:
+    driver: local
+  backend_reports:
+    driver: local
