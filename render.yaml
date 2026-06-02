@@ -1,0 +1,46 @@
+services:
+  # 1. FastAPI Machine Learning Microservice (Python)
+  - type: web
+    name: milkosense-ml-service
+    env: python
+    rootDir: ml-service
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    autoDeploy: true
+
+  # 2. Node.js Express API Backend (Node)
+  - type: web
+    name: milkosense-backend
+    env: node
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: MONGO_URI
+        sync: false # User will provide their MongoDB Atlas URI in the Render UI
+        placeholder: "mongodb+srv://..."
+      - key: ML_SERVICE_URL
+        fromService:
+          name: milkosense-ml-service
+          type: web
+          property: host
+      - key: JWT_SECRET
+        generateValue: true
+      - key: PYTHON_ML_API_KEY
+        value: dev-key-milkosense
+    autoDeploy: true
+
+  # 3. Static React Vite Frontend (Static Site)
+  - type: web
+    name: milkosense-frontend
+    env: static
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    publishDir: dist
+    envVars:
+      - key: VITE_API_URL
+        fromService:
+          name: milkosense-backend
+          type: web
+          property: host
+    autoDeploy: true
