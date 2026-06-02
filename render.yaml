@@ -6,7 +6,6 @@ services:
     rootDir: ml-service
     buildCommand: pip install -r requirements.txt
     startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
-    autoDeploy: true
 
   # 2. Node.js Express API Backend (Node)
   - type: web
@@ -28,7 +27,6 @@ services:
         generateValue: true
       - key: PYTHON_ML_API_KEY
         value: dev-key-milkosense
-    autoDeploy: true
 
   # 3. Static React Vite Frontend (Static Site)
   - type: static
@@ -41,5 +39,4 @@ services:
         fromService:
           name: milkosense-backend
           type: web
-          property: host
-    autoDeploy: true
+          property: url
